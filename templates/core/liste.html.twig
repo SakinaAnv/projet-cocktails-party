@@ -1,0 +1,118 @@
+{# templates/core/liste.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <p></p>
+            <h2 class="text-center">Choisissez votre cocktails</h2>
+        </div>
+    </div>
+    <p></p>
+    <center>
+        <div class="row justify-content-start">
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/cocktail-manhattan-boire.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Manhattan</p>
+                        <a href="#" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/Cocktail-gin-vermouth-campari.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Negroni</p>
+                        <a href="#" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/margarita.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Margarita</p>
+                        <a href="#" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a><strong>Ma commande</strong></a>
+                        <p></p>
+                        <ul class="list-group">
+                            <li>1 * Mojito</li>
+                            <li>1 * Pinna Colada</li>
+                        </ul>
+                        <p></p>
+                        <a href="#" class="btn btn-primary">Valider la commander</a>
+                        <p></p>
+                        <a href="#" class="btn btn-primary">Effacer la commander</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    <p></p>
+    <center>
+        <div class="row justify-content-start">
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/Old-fashioned.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Old Fashioned</p>
+                        <a href="#" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/mojito.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Mojito</p>
+                        <a href="#" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/sirop_tonic_cola.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p>Cuba Libre</p>
+                        <a href="#" class="btn btn-primary">Ajouter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary">+ Je crée mon cocktail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    <section class="bg-light p-3">
+    <h1>Les produits</h1>
+    </section>
+
+    <section class="row">
+        {% for cocktails in cocktail %}
+            <div class="col-4 mt-4">
+                <div class="border border-dark rounded p-2 clearfix">
+                    <h2>{{ cocktails.name }}</h2>
+                    <p>{{ cocktails.price }} €</p>
+                    <hr>
+                    <a href="{{path("cart_add", {id: cocktails.id})}}" class="btn btn-success">
+                        <i class="bi bi-cart-plus"></i> Ajouter
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
