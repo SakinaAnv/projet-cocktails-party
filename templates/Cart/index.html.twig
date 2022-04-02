@@ -26,7 +26,7 @@
         <tbody>
         {% for element in dataPanier %}
             <tr>
-                <td>{{ element.produit.title }}</td>
+                <td>{{ element.produit.name }}</td>
                 <td class="text-end">{{ element.produit.price }} €</td>
                 <td>{{ element.quantite }}</td>
                 <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
