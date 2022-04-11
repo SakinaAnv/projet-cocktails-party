@@ -26,12 +26,12 @@
         <tbody>
         {% for element in dataPanier %}
             <tr>
-                <td>{{ element.produit.title }}</td>
+                <td>{{ element.produit.name }}</td>
                 <td class="text-end">{{ element.produit.price }} €</td>
                 <td>{{ element.quantite }}</td>
                 <td class="text-end">{{ element.quantite * element.produit.price }} €</td>
                 <td>
-                    <a href="{{path("cart_add", {id: element.produit.id})}}" class="btn btn-success">
+                    <a href="{{path("cart_add", {id: element.produit.id})}}" class="btn btn-success"> value = "Quitter"
                         <i class="bi bi-cart-plus"></i>
                     </a>
                     <a href="{{path("cart_remove", {id: element.produit.id})}}" class="btn btn-warning">
@@ -44,7 +44,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5" class="text-center">Votre panier est vide</td>
+                <td colspan="5" class="text-center">Panier vide</td>
             </tr>
         {% endfor %}
         </tbody>
