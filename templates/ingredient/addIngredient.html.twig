@@ -1,0 +1,25 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+    {{ form_row(form.name) }}
+    {{ form_row(form.price) }}
+    {{ form_row(form.inventoryQuantity) }}
+    {{ form_row(form.imagePath) }}
+    {{ form_row(form.photo) }}
+
+    <div class="row">
+        <div class="col"> {{ form_row(form.submit) }}</div>
+        <div class="col">{{ form_row(form.reset) }}</div>
+    </div>
+    {{ form_rest(form) }}
+{% endblock %}
+
+{% block PageTitle %}
+    Ajouter un ingrédient
+{% endblock %}
+
+{% block Title %}
+    Ajouter un ingrédient
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+    <table class="table">
+        <tr class="table-active">
+            <td> <strong>Ingredient</strong></td>
+            <td> <strong>Quantité en stock</strong></td>
+
+        </tr>
+        {% for ingredient in ingredients  %}
+            <tr class="table-{% if ingredient.inventoryQuantity < 10 %}danger{% endif %}">
+                <td> {{ ingredient.name }}</td>
+                <td> {{ ingredient.inventoryQuantity }}</td>
+
+            </tr>
+
+        {% endfor %}
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('ingredient_pdf') }}" class="btn btn-primary">Générer le pdf des ingrédients à acheter</a>
+    {% endif %}
+{% endblock %}
+
+
+{% block PageTitle %}
+    Liste des ingredients
+{% endblock %}
+
+{% block Title %}
+    Liste des ingredients
+{% endblock %}
