@@ -108,6 +108,7 @@ class Cocktail
     public function setPrice(string $price): self
     {
         $this->price = $price;
+        return $this;
     }
 
    
@@ -152,7 +153,7 @@ class Cocktail
     }
 
     public function setUpdatedAt(?\DateTime $updatedAt): self
-
+    {
         $this->updatedAt = $updatedAt;
 
         return $this;
