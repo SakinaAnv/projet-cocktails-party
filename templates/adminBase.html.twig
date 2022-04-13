@@ -14,13 +14,14 @@
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
     <link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
     {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Interface Admin</a>
+    <a class="navbar-brand ps-3" href="#">Interface Admin</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -39,7 +40,6 @@
                     <li><a class="dropdown-item" href="{{path('app_logout')}}">Logout</a></li>
                 {% else %}
                     <li><a class="dropdown-item" href="{{path('app_login')}}">Login</a></li>
-                    {# <li><a class="dropdown-item" href="{{path('app_register')}}">Register</a></li> #}
                 {% endif %}
             </ul>
         </li>
@@ -99,7 +99,7 @@
                     </div>
                     {% endif %}
                     <div class="sb-sidenav-menu-heading">Commandes</div>
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
                         Commandes
                     </a>
@@ -212,6 +212,8 @@
 <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('node_modules/select2/dist/js/select2.min.js') }}"></script>
 {% block javascripts %}
+
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 </html>
