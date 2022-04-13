@@ -1,0 +1,36 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+    <div class="row">
+        <div class="col"> {{ form_row(form.firstname) }}</div>
+        <div class="col">{{ form_row(form.name) }}</div>
+    </div>
+    {{ form_row(form.email) }}
+    {{ form_row(form.roles) }}
+    {{ form_row(form.password) }}
+    <div class="row">
+        <div class="col"> {{ form_row(form.submit) }}</div>
+        <div class="col">{{ form_row(form.reset) }}</div>
+    </div>
+    {{ form_rest(form) }}
+
+
+{% endblock %}
+
+{% block PageTitle %}
+    Ajouter un Utilisateur
+{% endblock %}
+
+{% block Title %}
+    Ajouter un Utilisateur
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+{% endblock %}

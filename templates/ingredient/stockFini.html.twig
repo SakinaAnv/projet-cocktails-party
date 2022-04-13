@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <p>La liste des ingrédients à acheter :</p>
+    <table class="table">
+        <tr class="table-active">
+            <td> <strong>Ingredient</strong></td>
+            <td> <strong>Quantité en stock</strong></td>
+
+        </tr>
+        {% for ingredient in ingredients  %}
+
+
+            <tr class="table-danger">
+                <td> {{ ingredient.name }}</td>
+                <td> {{ ingredient.inventoryQuantity }}</td>
+
+            </tr>
+
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
+
