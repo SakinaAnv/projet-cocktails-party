@@ -21,10 +21,12 @@ class Cocktail
 
     use TimeStampTrait;
 
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
+
 
     #[ORM\Column(type: 'string', length: 50, unique: true)]
     #[NotBlank]
@@ -67,6 +69,7 @@ class Cocktail
         $this->ingredients = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,7 @@ class Cocktail
         return $this;
     }
 
+
     public function getPrice(): ?string
     {
         return $this->price;
@@ -104,9 +108,11 @@ class Cocktail
     public function setPrice(string $price): self
     {
         $this->price = $price;
-
-        return $this;
     }
+
+   
+    
+
 
     public function getImagePath(): ?string
     {
@@ -116,45 +122,57 @@ class Cocktail
     public function setImagePath(?string $imagePath): self
     {
         $this->imagePath = $imagePath;
-
-        return $this;
+         return $this;
     }
 
+   
+
+
     public function getCreatedAt(): ?\DateTime
-    {
+  {
         return $this->createdAt;
     }
 
+    
+
+
     public function setCreatedAt(\DateTime $createdAt): self
+
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
+
     public function getUpdatedAt(): ?\DateTime
+
     {
         return $this->updatedAt;
     }
 
     public function setUpdatedAt(?\DateTime $updatedAt): self
-    {
+
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
+
     public function getDeletedAt(): ?\DateTime
+
     {
         return $this->deletedAt;
     }
 
     public function setDeletedAt(\DateTime $deletedAt): self
+
     {
         $this->deletedAt = $deletedAt;
 
         return $this;
     }
+
 
     /**
      * @return Collection|Ingredient[]
@@ -179,4 +197,5 @@ class Cocktail
 
         return $this;
     }
+
 }

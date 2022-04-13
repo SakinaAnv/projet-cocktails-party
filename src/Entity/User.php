@@ -14,7 +14,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+
 #[ORM\HasLifecycleCallbacks]
+
+#[ORM\Table(name: '`user`')]
+
+
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
@@ -38,6 +44,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotBlank]
     private string $password;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $username;
+
+    /*#[ORM\Column(type: 'boolean')]
+    private $isVerified = false;*/
+
+  
     #[ORM\Column(type: 'string', length: 50)]
     #[NotBlank]
     private ?string $name;
@@ -59,6 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
 
     public function getId(): ?int
     {
@@ -130,6 +144,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+
+        return $this;
+    }
+
+
     public function getName(): ?string
     {
         return $this->name;
@@ -175,13 +204,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->updatedAt = $updatedAt;
 
+
         return $this;
     }
+
 
     public function getDeletedAt(): ?\DateTime
     {
         return $this->deletedAt;
     }
+
+
 
     public function setDeletedAt(?\DateTime $deletedAt): self
     {
