@@ -4,14 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'Un utilisateur existe déjà avec cette adresse email.')]
 
@@ -31,12 +28,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-
     #[ORM\Column(type: 'string', length: 255)]
     private $username;
 
     /*#[ORM\Column(type: 'boolean')]
     private $isVerified = false;*/
+
   
     #[ORM\Column(type: 'string', length: 50)]
     private $name;
@@ -134,6 +131,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->username = $username;
 
+
+        return $this;
+    }
+
+
     public function getName(): ?string
     {
         return $this->name;
@@ -184,6 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
+
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -192,6 +195,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+    }
+
 
     public function getDeletedAt(): ?\DateTimeImmutable
     {
@@ -201,7 +206,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
     {
         $this->deletedAt = $deletedAt;
-
 
         return $this;
     }
