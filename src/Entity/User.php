@@ -44,11 +44,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotBlank]
     private string $password;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $username;
+    //#[ORM\Column(type: 'string', length: 255)]
+    //private $username;
 
-    /*#[ORM\Column(type: 'boolean')]
-    private $isVerified = false;*/
+   // #[ORM\Column(type: 'boolean')]
+  //  private $isVerified = false;
 
   
     #[ORM\Column(type: 'string', length: 50)]
@@ -68,10 +68,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $deletedAt;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isVerified = false;
 
 
     public function getId(): ?int
@@ -107,7 +103,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);

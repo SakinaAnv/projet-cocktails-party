@@ -27,6 +27,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
+
     }
 
     public function authenticate(Request $request): Passport
@@ -51,9 +52,8 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
-        //return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+
+
         return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
     }// remplecer admin dashbord par le bon truc apres on peut mettre des if else en foction des roles
 
