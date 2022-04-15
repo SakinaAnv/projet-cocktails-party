@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     <title>
         {% block Title %}
-            interface admin
+            interface commande
         {% endblock %}
     </title>
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
@@ -19,7 +19,7 @@
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Interface Admin</a>
+    <a class="navbar-brand ps-3" href="index.html">Interface Commande</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -84,7 +84,7 @@
                             </div>
                         </nav>
                     </div>
-                    <div class="sb-sidenav-menu-heading">Commandes</div>
+                    <div class="sb-sidenav-menu-heading" href="commande.html">Commandes</div>
                     <a class="nav-link" href="charts.html">
                         <div class="sb-nav-link-icon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
                         Commandes
@@ -133,7 +133,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">
                     {% block PageTitle %}
-                        Admin
+                        Commande
                     {% endblock %}</h1>
                 <!--
                 <ol class="breadcrumb mb-4">
@@ -150,7 +150,7 @@
                             </div>
                         {% endfor %}
 
-                        p          {%  for message in app.session.flashBag.get('success') %}
+                                 {%  for message in app.session.flashBag.get('success') %}
 
                             <div class="alert alert-success">
                                 {{ message }}
@@ -164,7 +164,7 @@
                             </div>
                         {% endfor %}
                         {% block body %}
-                            Mon Body
+                           <p> Bonjour </p>
                         {% endblock %}
                     </div>
                 </div>

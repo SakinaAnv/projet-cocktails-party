@@ -8,7 +8,7 @@
     <meta name="author" content="" />
     <title>
         {% block Title %}
-            interface admin
+            interface commande
         {% endblock %}
     </title>
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
@@ -19,7 +19,7 @@
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Interface Admin</a>
+    <a class="navbar-brand ps-3" href="index.html">Interface Commande</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -84,7 +84,7 @@
                             </div>
                         </nav>
                     </div>
-                    <div class="sb-sidenav-menu-heading">Commandes</div>
+                    <div class="sb-sidenav-menu-heading" href="commande.html">Commandes</div>
                     <a class="nav-link" href="charts.html">
                         <div class="sb-nav-link-icon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
                         Commandes
@@ -133,7 +133,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">
                     {% block PageTitle %}
-                        Admin
+                        Confirmation de la commande
                     {% endblock %}</h1>
                 <!--
                 <ol class="breadcrumb mb-4">
@@ -150,7 +150,7 @@
                             </div>
                         {% endfor %}
 
-                        p          {%  for message in app.session.flashBag.get('success') %}
+                        {%  for message in app.session.flashBag.get('success') %}
 
                             <div class="alert alert-success">
                                 {{ message }}
@@ -164,27 +164,43 @@
                             </div>
                         {% endfor %}
                         {% block body %}
-                            Mon Body
-                        {% endblock %}
+
+                        <p>Etes-vous sûre de vouloir commander la commande ?</p>
+
+                        <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                            {{ form_start(form) }}
+
+                                {{ form_row(form.etat) }}
+
+                            <button class="btn-success btn" type="submit">Oui, je confirme la commande</button>
+                            <a href="commandes" class="btn btn-danger">Retour à la liste des commandes</a>
+
+                            {{ form_end(form) }}
+
+                        </div>
+
                     </div>
-                </div>
-                <div style="height: 100vh"></div>
-                <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
-            </div>
-        </main>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Cocktail Party 2022</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
+                    {% endblock %}
                 </div>
             </div>
-        </footer>
+            <div style="height: 100vh"></div>
+            <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
     </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Cocktail Party 2022</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
@@ -192,4 +208,3 @@
 {% endblock %}
 </body>
 </html>
-

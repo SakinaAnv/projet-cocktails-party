@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\Ingredient;
+use App\Entity\MessengerMessages;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Ingredient|null find($id, $lockMode = null, $lockVersion = null)
- * @method Ingredient|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ingredient[]    findAll()
- * @method Ingredient[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MessengerMessages|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MessengerMessages|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MessengerMessages[]    findAll()
+ * @method MessengerMessages[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class IngredientRepository extends ServiceEntityRepository
+class MessengerMessagesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Ingredient::class);
+        parent::__construct($registry, MessengerMessages::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(Ingredient $entity, bool $flush = true): void
+    public function add(MessengerMessages $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class IngredientRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(Ingredient $entity, bool $flush = true): void
+    public function remove(MessengerMessages $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,15 +46,15 @@ class IngredientRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return Ingredient[] Returns an array of Ingredient objects
+    //  * @return MessengerMessages[] Returns an array of MessengerMessages objects
     //  */
     /*
     public function findByExampleField($value)
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
             ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
+            ->orderBy('m.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -63,10 +63,10 @@ class IngredientRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Ingredient
+    public function findOneBySomeField($value): ?MessengerMessages
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.exampleField = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
