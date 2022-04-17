@@ -3,52 +3,71 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Traits\TimeStampTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+
+#[ORM\HasLifecycleCallbacks]
+
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'Un utilisateur existe déjà avec cette adresse email.')]
+
+
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    //use TimeStampTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
+
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    #[NotBlank]
+    private ?string $email;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [];
+    private array $roles = [];
+
 
     #[ORM\Column(type: 'string')]
-    private $password;
+    #[NotBlank]
+    private string $password;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $username;
+    //#[ORM\Column(type: 'string', length: 255)]
+    //private $username;
 
-    /*#[ORM\Column(type: 'boolean')]
-    private $isVerified = false;*/
+    // #[ORM\Column(type: 'boolean')]
+    //  private $isVerified = false;
 
-  
-    #[ORM\Column(type: 'string', length: 50)]
-    private $name;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $firstname;
+    #[NotBlank]
+    private ?string $name;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private $createdAt;
+    #[ORM\Column(type: 'string', length: 50)]
+    #[NotBlank]
+    private ?string $firstname;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $updatedAt;
+    #[ORM\Column(type: 'datetime')]
+    private \DateTime $createdAt;
 
-    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $deletedAt;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTime $updatedAt;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTime $deletedAt;
+
 
 
     public function getId(): ?int
@@ -84,7 +103,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -122,7 +140,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getUsername(): ?string
+    /*public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -133,7 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
         return $this;
-    }
+    }*/
 
 
     public function getName(): ?string
@@ -160,24 +178,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(?\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -186,6 +204,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
+    public function getDeletedAt(): ?\DateTime
+    {
+        return $this->deletedAt;
+    }
+
+
+
+    public function setDeletedAt(?\DateTime $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
 
     public function isVerified(): bool
     {
@@ -195,17 +226,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
-    }
-
-
-    public function getDeletedAt(): ?\DateTimeImmutable
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeImmutable $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
 
         return $this;
     }

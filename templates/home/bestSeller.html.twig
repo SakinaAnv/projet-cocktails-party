@@ -1,0 +1,20 @@
+{# templates/event/bestSeller.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <section class="bg-light p-3">
+    <center><h1>Best sellers</h1></center>
+    </section>
+
+    <section class="row justify-content-start">
+        {% for bestSellers in bestSeller %}
+        <div class="col-sm-3">
+            <p></p>
+            <div class="card">
+                <center><h2>{{ bestSellers.name }}</h2></center>
+                <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/{{bestSellers.imagePath}}" alt="Card image cap">
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

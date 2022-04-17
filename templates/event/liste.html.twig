@@ -1,25 +1,26 @@
-{# templates/core/liste.html.twig #}
+{# templates/event/liste.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil | {{ parent() }}{% endblock %}
 
 {% block content %}
     <section class="bg-light p-3">
-    <h1>Les produits</h1>
+    <center><h1>Nos cocktails</h1></center>
     </section>
 
     <section class="row justify-content-start">
         {% for cocktails in cocktail %}
         <div class="col-sm-3">
+            <p></p>
             <div class="card">
                 <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/{{cocktails.imagePath}}" alt="Card image cap">
                 <div class="card-body">
-                    <h2>{{ cocktails.name }}</h2>
-                    <p>{{ cocktails.price }} €</p>
+                    <center><h2>{{ cocktails.name }}</h2></center>
+                    <center><p>{{ cocktails.price }} €</p></center>
                     <hr>
-                    <a href="{{path("cart_add", {id: cocktails.id})}}" class="btn btn-success">
-                        <i class="bi bi-cart-plus"></i> Ajouter
-                    </a>
+                    <center><a href="{{path("cart_add", {id: cocktails.id})}}" class="btn btn-success">
+                        <i class="bi bi-cart-plus"></i> Ajouter à mon panier
+                    </a></center>
                 </div>
             </div>
         </div>

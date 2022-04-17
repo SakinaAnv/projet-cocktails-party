@@ -14,7 +14,7 @@
 
             {% if app.user %}
                 <div class="col s12 m6 l6 offset-m3 offset-l3">
-                    Tu es actuellement connect&#xE9; en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">D&#xE9;connecte-toi</a>
+                    Tu es actuellement connect&#xE9; en tant que {{ app.user.firstName }}, <a href="{{ path('app_logout') }}">D&#xE9;connecte-toi</a>
                 </div>
             {% endif %}
             <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
@@ -43,3 +43,9 @@
         </form>
     </div>
 {% endblock %}
+
+
+
+
+
+

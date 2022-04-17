@@ -1,0 +1,30 @@
+{# templates/home/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col bg-light text-dark">
+            <p></p>
+            <h2 class="text-center">Choisissez une table</h2>
+        </div>
+    </div>
+    <p></p>
+    <center>
+        <section class="row justify-content-md-center">
+                <div class="col-3 mt-3 bg-light text-dark">
+                    <div class="border border-light rounded p-1 clearfix">
+                        <img class="card-img-top" src="https://i.etsystatic.com/11099705/r/il/6889e7/2142973125/il_570xN.2142973125_9vef.jpg" alt="Card image cap">
+                        <p></p>
+                        {% for tables in table %}
+                        <a href="{{ path('listeCocktails') }}" class="btn btn-dark">
+                            <i class="bi bi-cart-plus"></i> {{ tables.id }}
+                        </a>
+                        {% endfor %}
+                        <hr>
+                    </div>
+                </div>
+        </section>
+    </center>
+{% endblock %}

@@ -3,16 +3,12 @@
 {% block title %}Votre panier{% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col">
-            <p></p>
-            <h2 class="text-center">Choisissez votre cocktails</h2>
-        </div>
-    </div>
-    <section class="bg-light p-3">
-        <h1>Votre panier</h1>
-    </section>
-
+    <center>
+        <section class="bg-light p-3">
+            <h1>Mon panier</h1>
+        </section>
+    </center>
+    <p></p>
     <table class="table">
         <thead>
         <tr>
@@ -41,7 +37,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5" class="text-center">Panier vide</td>
+                <td colspan="5" class="text-center">Votre commande a bien été enregistrée</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -50,7 +46,7 @@
             <td colspan="3">Total</td>
             <td class="text-end">{{ total }} €</td>
             <td>
-                <a href="{{path("cart_delete_all")}}" class="btn btn-warning"> Acheter
+                <a href="{{path("cart_delete_all")}}" class="btn btn-warning"> Commander
                     <i class="bi bi-cart-x"></i>
                 </a>
             </td>
