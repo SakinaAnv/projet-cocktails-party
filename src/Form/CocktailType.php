@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Cocktail;
 use App\Entity\Ingredient;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -48,13 +49,17 @@ class CocktailType extends AbstractType
                 'required'=>true,
                 'class' => Ingredient::class,
                 'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('ingredients')
+                        ->where('ingredients.inventoryQuantity > 0
+                       ');
+                },
                 'attr' => [
                     'class' => 'select2'
                 ]
             ])
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('deletedAt')
             ->add('submit', SubmitType::class)
             ->add('reset', ResetType::class)
         ;

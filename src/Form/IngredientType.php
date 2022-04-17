@@ -42,7 +42,6 @@ class IngredientType extends AbstractType
             ])
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('deletedAt')
             ->add('submit', SubmitType::class)
             ->add('reset', ResetType::class)
         ;

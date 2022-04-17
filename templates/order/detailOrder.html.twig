@@ -1,0 +1,34 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+    <div id="#box">
+        <p> <strong>Commande numéro </strong>: {{ id }}</p>
+        <table class="table">
+            <tr class="table-active">
+
+                <td> <strong>Nom des cocktails Commandés</strong></td>
+                <td> <strong>Description cocktail</strong></td>
+
+
+            </tr>
+            {% for cocktail in order  %}
+                <tr >
+                    <td> {{ cocktail.name}}</td>
+                    <td> {{ cocktail.description }} </td>
+                </tr>
+
+            {% endfor %}
+        </table>
+        <a href="{{ path('list_order') }}" class="btn btn-primary">Revenir à la liste des commandes</a>
+    </div>
+
+{% endblock %}
+
+
+{% block PageTitle %}
+    Details de commande
+{% endblock %}
+
+{% block Title %}
+    Details de commande
+{% endblock %}

@@ -26,26 +26,8 @@ class IngredientController extends AbstractController
     public function __construct(private EventDispatcherInterface $dispatcher)
     {
     }
-/*
-    #[Route('/{pdfChecker}', name: 'ingredient')]
-    public function index(ManagerRegistry $doctrine,PdfService $pdf,$pdfChecker): Response
-    {
-        $repository = $doctrine->getRepository(Ingredient::class);
-        $ingredient = $repository->findAll();
-        if ($pdfChecker == true){
-            $ingredients = $repository->findByQuantiteInferieur(10);
-            $html = $this->render('ingredient/stockFini.html.twig',
-                ['ingredients' => $ingredients]
-            );
-             $pdf->showPdfFile($html);
-        }
 
-        return $this->render('ingredient/index.html.twig',
-            ['ingredients' => $ingredient]
-        );
 
-    }
-*/
 
     #[Route('/', name: 'ingredient')]
     public function index(ManagerRegistry $doctrine): Response
@@ -57,21 +39,7 @@ class IngredientController extends AbstractController
             ['ingredients' => $ingredient]
         );
     }
-/*
-    #[Route('/pdf', name: 'ingredient_pdf')]
-    public function generatePdfIngredientFini(Ingredient $ingredient=null, PdfService $pdf,ManagerRegistry $doctrine) {
-        $repository = $doctrine->getRepository(Ingredient::class);
-        $ingredients = $repository->findByQuantiteInferieur(10);
-        $html = $this->render('ingredient/stockFini.html.twig',
-            ['ingredients' => $ingredients,
-                'ingredient' => $ingredient
-                ]);
 
-        $pdf->showPdfFile($html);
-    }
-
-
-*/
 
     #[Route('/pdf', name: 'ingredient_pdf'),
    IsGranted('ROLE_ADMIN')
@@ -105,7 +73,7 @@ class IngredientController extends AbstractController
         $form = $this->createForm(IngredientType::class, $ingredient);
         $form->remove('createdAt');
         $form->remove('updatedAt');
-        $form->remove('deletedAt');
+
 
         $form->handleRequest($request);
 
@@ -137,7 +105,7 @@ class IngredientController extends AbstractController
     }
 
     #[
-        Route('/delete/{id}', name: 'ingredient_delete'),
+        Route('/delete/{id<\d+>}', name: 'ingredient_delete'),
         IsGranted('ROLE_ADMIN')
     ]
     public function deleteUser(Ingredient $ingredient = null, ManagerRegistry $doctrine): RedirectResponse {

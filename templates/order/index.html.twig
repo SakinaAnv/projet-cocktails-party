@@ -1,0 +1,43 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block body %}
+    <div id="#box">
+        <table class="table">
+            <tr class="table-active">
+                <td> <strong>Numéro Commande</strong></td>
+                <td> <strong>Numéro de table</strong></td>
+                <td> <strong>Date de Commande</strong></td>
+                <td> <strong>Etat</strong></td>
+                <td> <strong>A propos de la commande</strong></td>
+
+            </tr>
+            {% for order in orders  %}
+                <tr >
+                    <td> {{ order.id }}</td>
+                    <td> {{ order.idTable.id}}</td>
+                    <td> {{ order.createdAt|format_datetime() }} </td>
+                    <td> {{ order.etat }} </td>
+                    <td>
+                            <a href="{{ path('order_detail', {id: order.id}) }}" class="btn btn-primary">Détails</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            {% if order.etat == 'En cours'%}
+                            <a href="{{ path('order_terminate', {id: order.id}) }}" class="btn btn-primary">Terminer</a>
+                        {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
+
+
+{% block PageTitle %}
+    Liste des commandes
+{% endblock %}
+
+{% block Title %}
+    Liste des commandes
+{% endblock %}

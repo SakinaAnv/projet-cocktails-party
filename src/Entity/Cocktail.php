@@ -38,13 +38,6 @@ class Cocktail
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[NotBlank]
-    /**
-     * @Assert\Regex(
-     *      pattern     = "/^\d+(,\d{1,2})?$/",
-     *     htmlPattern = "\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})")
-     *
-     */
-
     private $price;
 
 
@@ -57,8 +50,6 @@ class Cocktail
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $updatedAt;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $deletedAt;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'cocktails',cascade:['persist','remove'] )]
     #[ORM\JoinColumn(nullable: false)]
@@ -166,19 +157,6 @@ class Cocktail
     }
 
 
-    public function getDeletedAt(): ?\DateTime
-
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(\DateTime $deletedAt): self
-
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
 
 
     /**

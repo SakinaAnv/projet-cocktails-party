@@ -36,7 +36,7 @@ class Order
     #[ORM\ManyToMany(targetEntity: Cocktail::class, inversedBy: 'orders')]
     private $cocktails;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string')]
     private $etat;
 
     public function __construct()
@@ -134,12 +134,12 @@ class Order
         return $this;
     }
 
-    public function getEtat(): ?int
+    public function getEtat(): ?string
     {
         return $this->etat;
     }
 
-    public function setEtat(int $etat): self
+    public function setEtat(string $etat): self
     {
         $this->etat = $etat;
 

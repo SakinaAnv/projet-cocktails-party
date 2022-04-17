@@ -68,7 +68,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $personne);
         $form->remove('createdAt');
         $form->remove('updatedAt');
-        $form->remove('deletedAt');
+
 
         $form->handleRequest($request);
 

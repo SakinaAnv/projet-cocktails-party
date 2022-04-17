@@ -34,7 +34,6 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('deletedAt')
             ->add('submit', SubmitType::class)
             ->add('reset', ResetType::class)
         ;

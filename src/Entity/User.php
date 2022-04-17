@@ -66,8 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $updatedAt;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $deletedAt;
+
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Order::class)]
     private $orders;
@@ -202,19 +201,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getDeletedAt(): ?\DateTime
-    {
-        return $this->deletedAt;
-    }
-
-
-
-    public function setDeletedAt(?\DateTime $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
 
     public function isVerified(): bool
     {

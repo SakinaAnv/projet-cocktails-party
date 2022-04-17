@@ -54,7 +54,7 @@ class CocktailController extends AbstractController
         $form = $this->createForm(CocktailType::class, $cocktail);
         $form->remove('createdAt');
         $form->remove('updatedAt');
-        $form->remove('deletedAt');
+
 
         $form->handleRequest($request);
 

@@ -110,8 +110,16 @@ class CartController extends AbstractController
     {
         $commande = new Order();
         $table= $tableRepo->find($session->get("table"));
-        $commande->setIdTable($table);
+        if($table==null){
+            $this->addFlash('error', "Veuillez choisir une table d'abord");
+            return $this->redirectToRoute('homepage');
+        }else{
+            $commande->setIdTable($table);
+        }
+
         $table->setAccessibility('false');
+        $commande->setEtat('En cours');
+
         if ($user) {
             $commande->setIdUser($user);
         }
