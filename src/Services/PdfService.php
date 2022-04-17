@@ -22,14 +22,9 @@ class PdfService
     public function showPdfFile($html) {
         $this->domPdf->loadHtml($html);
         $this->domPdf->render();
-        $this->domPdf->stream("A_acheter.pdf", [
+        $this->domPdf->stream("Ingredients_a_acheter.pdf", [
             'Attachement' => true
         ]);
     }
 
-    public function generateBinaryPDF($html) {
-        $this->domPdf->loadHtml($html);
-        $this->domPdf->render();
-        $this->domPdf->output();
-    }
 }

@@ -22,9 +22,12 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute('homepage');
             }
             if (in_array('ROLE_ADMIN', $user->getRoles())) {
-                return $this->redirectToRoute('homepage');
+                return $this->redirectToRoute('admin_dashboard');
             }
-         }
+            if (in_array('ROLE_STAFF', $user->getRoles())) {
+                return $this->redirectToRoute('admin_dashboard');
+            }
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

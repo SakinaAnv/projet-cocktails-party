@@ -1,71 +1,30 @@
-{# templates/core/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil | {{ parent() }}{% endblock %}
 
 {% block content %}
+
     <div class="row">
         <div class="col">
             <p></p>
             <h2 class="text-center">Choisissez une table</h2>
         </div>
     </div>
-    <p></p>
     <center>
-        <div class="row justify-content-around">
-            <div class="col-sm-3">
+        <div class="row" >
+        {% for table in tables %}
+        <div class="row justify-content-around  ">
+            <div class="col-sm-7 g-l">
                 <div class="card">
-                    <img class="card-img-top" src="https://c7.alamy.com/compfr/3/b8f46cd529f64f81b8a3798885921a2e/2a1e03f.jpg" alt="Card image cap">
+                    <img class="card-img-top" src="{{asset('assets/images/stickers-cocktail.jpg')}}" alt="Card image cap">
                     <div class="card-body">
-                        <a href="{{ path('listeCocktails') }}" class="btn btn-primary">Choisir la table 1</a>
+                        <a href="{{ path('listeCocktails', {id: table.id}) }}" class="btn btn-primary">Choisir la table {{ table.id }}</a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://c7.alamy.com/compfr/3/b0f6081b7f534d48a9e228fc5ca1aefb/2a1e03p.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="{{ path('listeCocktails') }}" class="btn btn-primary">Choisir la table 2</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card">
-                    <img class="card-img-top" src="https://c7.alamy.com/compfr/3/91c4dd57452b418a85958de11e580687/2a1e04b.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <a href="{{ path('listeCocktails') }}" class="btn btn-primary">Choisir la table 3</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </center>
-    <p></p>
-    <center>
-    <div class="row justify-content-around">
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://c7.alamy.com/compfr/3/a03f28314d874a089017beadfd80040f/2a1e03e.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <a href="{{ path('listeCocktails') }}" class="btn btn-primary">Choisir la table 4</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://c7.alamy.com/compfr/3/b964ef458a2d4c38a39514b7625bf209/2a1e03m.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <a href="{{ path('listeCocktails') }}" class="btn btn-primary">Choisir la table 5</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card">
-                <img class="card-img-top" src="https://c7.alamy.com/compfr/3/38fbda833bcf43fdb8b660f5cf3d8d16/2a1e041.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <a href="{{ path('listeCocktails') }}" class="btn btn-primary">Choisir la table 6</a>
-                </div>
-            </div>
-        </div>
     </div>
+
+        {% endfor %}
+        </div>
     </center>
 {% endblock %}

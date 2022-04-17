@@ -60,13 +60,19 @@ class Cocktail
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $deletedAt;
 
-    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'cocktails')]
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'cocktails',cascade:['persist','remove'] )]
+    #[ORM\JoinColumn(nullable: false)]
+   # #[ORM\JoinTable(name:'cocktail_ingredient')]
     #[NotBlank]
     private Collection $ingredients;
+
+    #[ORM\ManyToMany(targetEntity: Order::class, mappedBy: 'cocktails')]
+    private $orders;
 
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
 
@@ -195,6 +201,33 @@ class Cocktail
     public function removeIngredient(Ingredient $ingredient): self
     {
         $this->ingredients->removeElement($ingredient);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->addCocktail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            $order->removeCocktail($this);
+        }
 
         return $this;
     }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Traits\TimeStampTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -44,11 +46,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotBlank]
     private string $password;
 
-    //#[ORM\Column(type: 'string', length: 255)]
-    //private $username;
 
-   // #[ORM\Column(type: 'boolean')]
-  //  private $isVerified = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
   
     #[ORM\Column(type: 'string', length: 50)]
@@ -67,6 +68,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $deletedAt;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Order::class)]
+    private $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
 
 
@@ -140,18 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
 
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-
-        return $this;
-    }
 
 
     public function getName(): ?string
@@ -226,6 +224,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getIdUser() === $this) {
+                $order->setIdUser(null);
+            }
+        }
 
         return $this;
     }

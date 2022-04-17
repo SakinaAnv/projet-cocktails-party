@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {% block stylesheets %}
-        {# Bootstrap CSS #}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     {% endblock %}
 
@@ -29,12 +28,30 @@
     </div>
 </nav>
 {% include 'includes/_header.html.twig' %}
+{%  for message in app.session.flashBag.get('info') %}
 
+    <div class="alert alert-info">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{%  for message in app.session.flashBag.get('success') %}
+
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{%  for message in app.session.flashBag.get('error') %}
+
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
 {% block content %}
     {# Le contenu de chaque page sera ici #}
 {% endblock %}
 
-{% include 'includes/_footer.html.twig' %}
 
 {% block scripts %}
     {# jQuery first, then Popper.js, then Bootstrap JS #}

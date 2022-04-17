@@ -1,24 +1,32 @@
 {% extends 'adminBase.html.twig' %}
 
 {% block body %}
+    <div id="#box">
     <table class="table">
         <tr class="table-active">
             <td> <strong>Ingredient</strong></td>
             <td> <strong>Quantité en stock</strong></td>
+            <td> <strong>Prix</strong></td>
+            <td> <strong>Paramétrages</strong></td>
 
         </tr>
         {% for ingredient in ingredients  %}
             <tr class="table-{% if ingredient.inventoryQuantity < 10 %}danger{% endif %}">
                 <td> {{ ingredient.name }}</td>
                 <td> {{ ingredient.inventoryQuantity }}</td>
-
+                <td> {{ ingredient.price }} €</td>
+                <td> <a href="{{ path('ingredient_edit', {id: ingredient.id}) }}" class="btn btn-primary">Editer</a>
+               <a href="{{ path('ingredient_delete', {id: ingredient.id}) }}" class="btn btn-primary">Supprimer</a></td>
             </tr>
 
         {% endfor %}
     </table>
+    </div>
     {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('ingredient_pdf') }}" class="btn btn-primary">Générer le pdf des ingrédients à acheter</a>
     {% endif %}
+
+
 {% endblock %}
 
 

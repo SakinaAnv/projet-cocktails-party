@@ -29,11 +29,11 @@ class IngredientsFixtures extends Fixture
             "Hygiéniste dentaire "
         ];
         for ($i=0; $i<count($data);$i++) {
-            $job = new Ingredient();
-            $job->setName($data[$i]);
-            $job->setInventoryQuantity($faker->name);
-            $job->set;
-            $manager->persist($job);
+            $ingredient = new Ingredient();
+            $ingredient->setName($data[$i]);
+            $ingredient->setInventoryQuantity($faker->name);
+
+            $manager->persist($ingredient);
         }
         $manager->flush();
     }

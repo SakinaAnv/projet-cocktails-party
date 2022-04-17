@@ -48,14 +48,14 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
 
-
-        return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
-    }// remplecer admin dashbord par le bon truc apres on peut mettre des if else en foction des roles
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
+    }
 
     protected function getLoginUrl(Request $request): string
     {
