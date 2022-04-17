@@ -8,20 +8,16 @@
                 <img class="card-img-top" src="{{asset('uploads/cocktails/'~cocktail.imagePath)}}" alt="image cocktail">
                 <div class="card-body">
                     <h5 class="card-title">{{ cocktail.name }}</h5>
-
-                    {#<h6 class="card-subtitle mb-2 text-muted">{{ cocktail.description }}</h6>  #}
                     <p class="card-text">{{ cocktail.description }}</p>
-                    <p class="card-text">Prix : {{ cocktail.price }}</p>
+                    <p class="card-text">Prix : {{ cocktail.price }} €</p>
                     <p class="card-text">Crée le : {{ cocktail.createdAt|format_datetime() }}</p>
                     {% if is_granted('ROLE_ADMIN') %}
-                      {#   <a href="{{ path('cocktail_detail', {id: personne.id}) }}" class="card-link">
-                            <i class="fas fa-info-circle"></i>
-                        </a>#}
-                    <a href="#" class="btn btn-primary">Editer</a>
-                    <a href="#" class="btn btn-primary">Supprimer</a>
+                    <a href="{{ path('cocktail_edit', {id: cocktail.id}) }}" class="btn btn-primary">Editer</a>
+                    <a href="{{ path('cocktail_delete', {id: cocktail.id}) }}" class="btn btn-primary">Supprimer</a>
                     {% endif %}
                 </div>
             </div>
+
         {% endfor %}
     </div>
 {% endblock %}

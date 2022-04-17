@@ -1,4 +1,3 @@
-{# templates/core/liste.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil | {{ parent() }}{% endblock %}
@@ -12,8 +11,9 @@
         {% for cocktails in cocktail %}
         <div class="col-sm-3">
             <div class="card">
-                <img class="card-img-top" src="https://boiremixologie.com/files/medias/_thumb/{{cocktails.imagePath}}" alt="Card image cap">
+                <img class="card-img-top" src="{{asset('uploads/cocktails/'~cocktails.imagePath)}}" alt="image cocktail">
                 <div class="card-body">
+                    <p class="card-text">{{ cocktails.description }}</p>
                     <h2>{{ cocktails.name }}</h2>
                     <p>{{ cocktails.price }} €</p>
                     <hr>

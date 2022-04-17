@@ -12,13 +12,21 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
 
-        // get the login error if there is one
+        if ($user=$this->getUser()) {
+
+            if (in_array('ROLE_CLIENT', $user->getRoles())) {
+                return $this->redirectToRoute('homepage');
+            }
+            if (in_array('ROLE_ADMIN', $user->getRoles())) {
+                return $this->redirectToRoute('admin_dashboard');
+            }
+            if (in_array('ROLE_STAFF', $user->getRoles())) {
+                return $this->redirectToRoute('admin_dashboard');
+            }
+        }
+
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);

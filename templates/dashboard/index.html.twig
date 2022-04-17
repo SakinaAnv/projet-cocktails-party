@@ -193,3 +193,10 @@
 </body>
 </html>
 
+{% block PageTitle %}
+    {% if is_granted('ROLE_ADMIN') %}
+        Admin
+    {% else %}
+         Barman
+    {% endif %}
+{% endblock %}

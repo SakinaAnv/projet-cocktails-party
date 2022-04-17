@@ -19,7 +19,13 @@
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="index.html">Interface Admin</a>
+    <a class="navbar-brand ps-3" href="#">
+        {% if is_granted('ROLE_ADMIN') %}
+            Interface Admin
+    {% else %}
+        Interface Barman
+        {% endif %}</a>
+
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -78,9 +84,9 @@
                             </a>
                             <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="register.html">Liste du personnel</a>
-                                    <a class="nav-link" href="login.html">Ajout de personnel</a>
-                                </nav>
+                                    <a class="nav-link" href="{{ path('personnel_list') }}">Liste du personnel</a>
+                                    <a class="nav-link" href="{{ path('user_edit') }}">Ajout de personnel</a>
+                   </nav>
                             </div>
                         </nav>
                     </div>
@@ -95,12 +101,14 @@
                         <div class="sb-nav-link-icon"><i class="fa fa-eye"></i></div>
                         Liste des cocktails
                     </a>
-                    <a class="nav-link" href="charts.html">
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a class="nav-link" href="{{ path('cocktail_edit') }}">
                         <div class="sb-nav-link-icon"><i class="fa fa-plus"></i></div>
                         Ajout de cocktail
                     </a>
-                    <div class="sb-sidenav-menu-heading">Cocktails</div>
-
+                    {% endif %}
+                    <div class="sb-sidenav-menu-heading">Ingredients</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCocktail" aria-expanded="false" aria-controls="collapseCocktail">
                         <div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>
                         Cocktails
@@ -114,8 +122,12 @@
                             </a>
                             <div class="collapse" id="pagesCollapseCock" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordionCocktail">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="login.html">Liste des cocktails</a>
-                                    <a class="nav-link" href="register.html">Ajout de cocktail</a>
+
+                                    <a class="nav-link" href="{{ path('ingredient') }}">Liste des ingrédients</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="nav-link" href="{{ path('ingredient_edit') }}">Ajout ingrédient</a>
+                                    {% endif %}
+
                                 </nav>
                             </div>
                         </nav>
@@ -135,12 +147,6 @@
                     {% block PageTitle %}
                         Admin
                     {% endblock %}</h1>
-                <!--
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Static Navigation</li>
-                </ol>
-                -->
                 <div class="card mb-4">
                     <div class="card-body">
                         {%  for message in app.session.flashBag.get('info') %}

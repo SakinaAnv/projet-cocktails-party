@@ -15,13 +15,17 @@
                             {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Adresse email'}}) }}
                             <span class="error">{{ form_errors(registrationForm.email) }}</span>
                             <br><br>
-                            {{ form_widget(registrationForm.username, {'attr': {'placeholder': 'Nom d\'utilisateur'}}) }}
-                            <span class="error">{{ form_errors(registrationForm.username) }}</span>
+                            {{ form_widget(registrationForm.firstname, {'attr': {'placeholder': 'Prénom'}}) }}
+                            <span class="error">{{ form_errors(registrationForm.firstname) }}</span>
+                            <br><br>
+                            {{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Nom de famille'}}) }}
+                            <span class="error">{{ form_errors(registrationForm.name) }}</span>
                             <br><br>
                             {{ form_widget(registrationForm.plainPassword, {'attr': {'placeholder': 'Mot de passe'}}) }}
                             <span class="error">{{ form_errors(registrationForm.plainPassword) }}</span>
                             <br><br>
-                            <div class="form-group mb-3"><button class="btn btn-primary d-block w-100" id="submitButton" type="submit">Créer un compte</button></div>
+                              {{ form_rest(registrationForm) }}
+                             {#  <div class="form-group mb-3"><button class="btn btn-primary d-block w-100" id="submitButton" type="submit">Créer un compte</button></div>#}
                             <a class="already" href="/login">Déjà un compte ? Se connecter</a>
                             {{ form_end(registrationForm) }}
                         </form>

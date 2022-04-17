@@ -3,17 +3,16 @@
 namespace App\Events;
 
 use App\Entity\Ingredient;
-use App\Form\IngredientType;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class AddIngredientEvent extends Event
 {
 
-    const ADD_COCKTAIL_EVENT = 'cocktail.add';
+    const ADD_Ingredient_EVENT = 'ingredient.add';
 
     public function __construct(private Ingredient $ingredient) {}
 
-    public function getCocktail(): Ingredient {
+    public function getIngredient(): Ingredient {
         return $this->ingredient;
     }
 }

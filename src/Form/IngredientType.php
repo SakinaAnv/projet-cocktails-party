@@ -23,7 +23,7 @@ class IngredientType extends AbstractType
             ->add('inventoryQuantity')
             ->add('imagePath',HiddenType::class)
             ->add('photo', FileType::class, [
-                'label' => 'Votre image de l\'ingrédient ',
+                'label' => 'Ingredient image ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [

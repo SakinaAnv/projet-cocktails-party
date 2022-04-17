@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Events\AddUserEvent;
-use App\EventSubscriber\UserEventSubscriber;
 use App\Form\UserType;
+use App\Services\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -24,7 +24,7 @@ class UserController extends AbstractController
 {
     public function __construct(
         private UserPasswordHasherInterface $hasher,
-     //   private EventDispatcherInterface $dispatcher
+       private EventDispatcherInterface $dispatcher
     )
     {
     }
@@ -55,7 +55,7 @@ class UserController extends AbstractController
         User $personne = null,
         EntityManagerInterface $entityManager,
         Request $request,
-        //MailerService $mailer
+        MailerService $mailer
     ): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
@@ -86,9 +86,8 @@ class UserController extends AbstractController
             $entityManager->flush();
             if($new) {
                $message = " a été ajouté avec succès";
-              # $eventSubscriber=new UserEventSubscriber($mailer);
-               # $addUserEvent = new AddUserEvent($personne);
-               # $this->dispatcher->dispatch($addUserEvent, AddUserEvent::ADD_USER_EVENT);
+               $addUserEvent = new AddUserEvent($personne);
+              $this->dispatcher->dispatch($addUserEvent, AddUserEvent::ADD_USER_EVENT);
             } else {
             $message = " a été mis à jour avec succès";
         }

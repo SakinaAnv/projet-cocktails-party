@@ -10,6 +10,9 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $replyTo: 'mariemesoda88@gmail.com'
+
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -20,6 +23,20 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
             - '../src/Tests/'
+
+
+    App\EventListener\UserListener:
+        tags:
+            - { name: kernel.event_listener, event: user.add , method: onAddUserEvent}
+
+
+    App\EventListener\CocktailListener:
+        tags:
+            - { name: kernel.event_listener, event: cocktail.add , method: onAddCocktailEvent }
+
+    App\EventListener\IngredientListener:
+        tags:
+            - { name: kernel.event_listener, event: ingredient.add , method: onAddIngredientEvent }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

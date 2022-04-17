@@ -13,14 +13,14 @@ class MailerService
         $this->replyTo = $replyTo;
     }
     public function sendEmail(
-        $to = 'mariemesoda_sow@yahoo.fr',
+        $to = 'mariemesoda88@gmail.com',
         $content = '<p>Nous sommes heureux de vous accueillir sur le site Cocktail Party!<br>Rafraichissez-vous 
         avec les meilleurs sélections de cocktails du moment </p>',
         $subject = 'Bienvenue sur le site Cocktail Party!'
     ): void
     {
         $email = (new Email())
-            ->from('mariemesoda_sow@yahoo.fr')
+            ->from('mariemesoda88@gmail.com')
             ->to($to)
             ->replyTo($this->replyTo)
             ->subject($subject)

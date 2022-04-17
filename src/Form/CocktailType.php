@@ -25,7 +25,7 @@ class CocktailType extends AbstractType
             ->add('price', MoneyType::class)
             ->add('imagePath',HiddenType::class)
             ->add('photo', FileType::class, [
-                'label' => 'Votre image du cocktail ',
+                'label' => 'Cocktail image ',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
@@ -44,7 +44,7 @@ class CocktailType extends AbstractType
             ])
             ->add('ingredients', EntityType::class, [
                 'expanded' => false,
-                'mapped' =>false,
+                'mapped' =>true,
                 'required'=>true,
                 'class' => Ingredient::class,
                 'multiple' => true,
