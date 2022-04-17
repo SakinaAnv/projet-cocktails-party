@@ -32,6 +32,4 @@ class IngredientRepository extends ServiceEntityRepository
             ;
     }
 
-
-
 }

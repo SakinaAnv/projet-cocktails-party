@@ -21,7 +21,6 @@ class CocktailRepository extends ServiceEntityRepository
         parent::__construct($registry, Cocktail::class);
     }
 
-
     /**
      * @throws ORMException
      * @throws OptimisticLockException
@@ -46,5 +45,32 @@ class CocktailRepository extends ServiceEntityRepository
         }
     }
 
-    
+    // /**
+    //  * @return Cocktail[] Returns an array of Cocktail objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?Cocktail
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }

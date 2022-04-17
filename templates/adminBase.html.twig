@@ -8,13 +8,11 @@
     <meta name="author" content="" />
     <title>
         {% block Title %}
-            Interface admin
+            interface admin
         {% endblock %}
     </title>
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
-    <link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
     {% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
@@ -27,6 +25,7 @@
     {% else %}
         Interface Barman
         {% endif %}</a>
+
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
@@ -41,11 +40,10 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a class="dropdown-item" href="{{path('app_logout')}}">Logout</a></li>
-                {% else %}
-                    <li><a class="dropdown-item" href="{{path('app_login')}}">Login</a></li>
-                {% endif %}
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
             </ul>
         </li>
     </ul>
@@ -58,10 +56,10 @@
                     <div class="sb-sidenav-menu-heading">Core</div>
                     <a class="nav-link" href="#">
                         <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Tableau de bord
+                        Dashboard
                     </a>
-                    {% if is_granted('ROLE_ADMIN') %}
                     <div class="sb-sidenav-menu-heading">Utilisateurs</div>
+
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                         <div class="sb-nav-link-icon"><i class="fa fa-user" aria-hidden="true"></i></div>
                         Utilisateurs
@@ -75,8 +73,8 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ path('client_list') }}">Liste des clients</a>
-                                    <a class="nav-link" href="{{ path('user_edit') }}">Ajout de clients</a>
+                                    <a class="nav-link" href="login.html">Liste des clients</a>
+                                    <a class="nav-link" href="register.html">Ajout de clients</a>
                                 </nav>
                             </div>
 
@@ -88,22 +86,22 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{{ path('personnel_list') }}">Liste du personnel</a>
                                     <a class="nav-link" href="{{ path('user_edit') }}">Ajout de personnel</a>
-                                </nav>
+                   </nav>
                             </div>
                         </nav>
                     </div>
-                    {% endif %}
                     <div class="sb-sidenav-menu-heading">Commandes</div>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="charts.html">
                         <div class="sb-nav-link-icon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
                         Commandes
                     </a>
 
                     <div class="sb-sidenav-menu-heading">Cocktails</div>
-                    <a class="nav-link" href="{{ path('cocktail_list') }}">
+                    <a class="nav-link" href="charts.html">
                         <div class="sb-nav-link-icon"><i class="fa fa-eye"></i></div>
                         Liste des cocktails
                     </a>
+
                     {% if is_granted('ROLE_ADMIN') %}
                     <a class="nav-link" href="{{ path('cocktail_edit') }}">
                         <div class="sb-nav-link-icon"><i class="fa fa-plus"></i></div>
@@ -111,40 +109,35 @@
                     </a>
                     {% endif %}
                     <div class="sb-sidenav-menu-heading">Ingredients</div>
-
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCocktail" aria-expanded="false" aria-controls="collapseCocktail">
-                        <div class="sb-nav-link-icon"><i class="fab fa-apple"></i></div>
-                        Ingrédients
+                        <div class="sb-nav-link-icon"><i class="fas fa-cocktail"></i></div>
+                        Cocktails
                         <div class="sb-sidenav-collapse-arrow"><i class="bi bi-cup-straw"></i></div>
                     </a>
                     <div class="collapse" id="collapseCocktail" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordionCocktail">
                         <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionCocktail">
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseCock" aria-expanded="false" aria-controls="pagesCollapseCock">
-                                Gestion des ingrédients
+                                Liste des cocktails
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="pagesCollapseCock" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordionCocktail">
                                 <nav class="sb-sidenav-menu-nested nav">
+
                                     <a class="nav-link" href="{{ path('ingredient') }}">Liste des ingrédients</a>
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <a class="nav-link" href="{{ path('ingredient_edit') }}">Ajout ingrédient</a>
                                     {% endif %}
+
                                 </nav>
                             </div>
                         </nav>
                     </div>
                 </div>
             </div>
-
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                {% if app.user %}
-                {{ app.user.firstname }}, {{ app.user.email }}
-                    {% else %}
-                    Anonymous User
-                {% endif %}
-            </div>
-
+                Start Bootstrap
+            </div>c
         </nav>
     </div>
     <div id="layoutSidenav_content">
@@ -154,7 +147,6 @@
                     {% block PageTitle %}
                         Admin
                     {% endblock %}</h1>
-
                 <div class="card mb-4">
                     <div class="card-body">
                         {%  for message in app.session.flashBag.get('info') %}
@@ -164,7 +156,7 @@
                             </div>
                         {% endfor %}
 
-                                 {%  for message in app.session.flashBag.get('success') %}
+                        p          {%  for message in app.session.flashBag.get('success') %}
 
                             <div class="alert alert-success">
                                 {{ message }}
@@ -178,25 +170,23 @@
                             </div>
                         {% endfor %}
                         {% block body %}
-                            {% if app.user %}
-                               Bienvenue  {{ app.user.firstname }}
-                            {% else %}
-                               Bienvenue Anonymous User
-                            {% endif %}
+                            Mon Body
                         {% endblock %}
                     </div>
                 </div>
+                <div style="height: 100vh"></div>
+                <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div class="text-muted">Copyright &copy; Cocktail Party 2022</div>
-                    {# <div>
+                    <div>
                         <a href="#">Privacy Policy</a>
                         &middot;
                         <a href="#">Terms &amp; Conditions</a>
-                    </div> #}
+                    </div>
                 </div>
             </div>
         </footer>
@@ -204,11 +194,7 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
-<script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('node_modules/select2/dist/js/select2.min.js') }}"></script>
 {% block javascripts %}
-
-    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 </html>

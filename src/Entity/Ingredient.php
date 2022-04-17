@@ -2,81 +2,85 @@
 
 namespace App\Entity;
 
-use App\Repository\IngredientRepository;
-use App\Traits\TimeStampTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotBlank;
+
 /**
- * @UniqueEntity(fields={"name"}, message="There is already this ingredient ")
+ * Ingredient
+ *
+ * @ORM\Table(name="ingredient")
+ * @ORM\Entity(repositoryClass="App\Repository\IngredientRepository")
  */
-#[ORM\Entity(repositoryClass: IngredientRepository::class)]
-#[ORM\HasLifecycleCallbacks]
 class Ingredient
 {
-    use TimeStampTrait;
-
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id;
-
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
-    #[NotBlank]
     /**
-     * @Assert\Regex(
-     *      pattern     = "/^\d+(,\d{1,2})?$/",
-     *     htmlPattern = "\d{1,3}(?:[.,]\d{3})*(?:[.,]\d{2})")
+     * @var int
      *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
      */
     private $price;
 
-    #[ORM\Column(type: 'string', length: 50, unique: true)]
-    #[NotBlank]
-    private ?string $name;
-
-    #[ORM\Column(type: 'integer')]
-    #[NotBlank]
     /**
-     * @Assert\Positive
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private ?int $inventoryQuantity;
+    private $name;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="inventoryQuantity", type="integer", nullable=false)
+     */
+    private $inventoryquantity;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $imagePath;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imagePath", type="string", length=255, nullable=false)
+     */
+    private $imagepath;
 
-    #[ORM\Column(type: 'datetime')]
-    private \DateTime $createdAt;
+    /**
+     * @var datetime_immutable
+     *
+     * @ORM\Column(name="createdAt", type="datetime_immutable", nullable=false, options={"comment"="	"})
+     */
+    private $createdat;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $updatedAt;
+    /**
+     * @var datetime_immutable
+     *
+     * @ORM\Column(name="updateAt", type="datetime_immutable", nullable=false, options={"comment"="	"})
+     */
+    private $updateat;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTime $deletedAt;
-
-    #[ORM\ManyToMany(targetEntity: Cocktail::class, mappedBy: 'ingredients')]
-    private Collection $cocktails;
-
-    public function __construct()
-    {
-        $this->cocktails = new ArrayCollection();
-    }
+    /**
+     * @var datetime_immutable
+     *
+     * @ORM\Column(name="deletedAt", type="datetime_immutable", nullable=false)
+     */
+    private $deletedat;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice(string $price): self
+    public function setPrice(float $price): self
     {
         $this->price = $price;
 
@@ -95,94 +99,65 @@ class Ingredient
         return $this;
     }
 
-    public function getInventoryQuantity(): ?int
+    public function getInventoryquantity(): ?int
     {
-        return $this->inventoryQuantity;
+        return $this->inventoryquantity;
     }
 
-    public function setInventoryQuantity(int $inventoryQuantity): self
+    public function setInventoryquantity(int $inventoryquantity): self
     {
-        $this->inventoryQuantity = $inventoryQuantity;
+        $this->inventoryquantity = $inventoryquantity;
 
         return $this;
     }
 
-    public function getImagePath(): ?string
+    public function getImagepath(): ?string
     {
-        return $this->imagePath;
+        return $this->imagepath;
     }
 
-    public function setImagePath(?string $imagePath): self
+    public function setImagepath(string $imagepath): self
     {
-        $this->imagePath = $imagePath;
+        $this->imagepath = $imagepath;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedat(): ?\DateTimeImmutable
     {
-        return $this->createdAt;
+        return $this->createdat;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedat(\DateTimeImmutable $createdat): self
     {
-        $this->createdAt = $createdAt;
+        $this->createdat = $createdat;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdateat(): ?\DateTimeImmutable
     {
-        return $this->updatedAt;
+        return $this->updateat;
     }
 
-    public function setUpdatedAt(?\DateTime $updatedAt): self
+    public function setUpdateat(\DateTimeImmutable $updateat): self
     {
-        $this->updatedAt = $updatedAt;
+        $this->updateat = $updateat;
 
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTime
+    public function getDeletedat(): ?\DateTimeImmutable
     {
-        return $this->deletedAt;
+        return $this->deletedat;
     }
 
-    public function setDeletedAt(?\DateTime $deletedAt): self
+    public function setDeletedat(\DateTimeImmutable $deletedat): self
     {
-        $this->deletedAt = $deletedAt;
+        $this->deletedat = $deletedat;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Cocktail[]
-     */
-    public function getCocktails(): Collection
-    {
-        return $this->cocktails;
-    }
 
-    public function addCocktail(Cocktail $cocktail): self
-    {
-        if (!$this->cocktails->contains($cocktail)) {
-            $this->cocktails[] = $cocktail;
-            $cocktail->addIngredient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCocktail(Cocktail $cocktail): self
-    {
-        if ($this->cocktails->removeElement($cocktail)) {
-            $cocktail->removeIngredient($this);
-        }
-
-        return $this;
-    }
-    public function __toString(): string
-    {
-        return $this->name;
-    }
 }

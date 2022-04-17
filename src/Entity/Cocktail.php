@@ -62,7 +62,7 @@ class Cocktail
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'cocktails',cascade:['persist','remove'] )]
     #[ORM\JoinColumn(nullable: false)]
-   # #[ORM\JoinTable(name:'cocktail_ingredient')]
+    # #[ORM\JoinTable(name:'cocktail_ingredient')]
     #[NotBlank]
     private Collection $ingredients;
 
@@ -117,8 +117,8 @@ class Cocktail
         return $this;
     }
 
-   
-    
+
+
 
 
     public function getImagePath(): ?string
@@ -129,18 +129,18 @@ class Cocktail
     public function setImagePath(?string $imagePath): self
     {
         $this->imagePath = $imagePath;
-         return $this;
+        return $this;
     }
 
-   
+
 
 
     public function getCreatedAt(): ?\DateTime
-  {
+    {
         return $this->createdAt;
     }
 
-    
+
 
 
     public function setCreatedAt(\DateTime $createdAt): self
